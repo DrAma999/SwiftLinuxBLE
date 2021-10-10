@@ -12,9 +12,9 @@ let package = Package(
             targets: ["SwiftLinuxBLE"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/PureSwift/GATT", .branch("master")),
-        .package(url: "https://github.com/PureSwift/BluetoothLinux", .branch("master")),
-        .package(url: "https://github.com/wickwirew/Runtime.git", from: "2.1.0")
+        .package(url: "../GATT", .branch("master")),
+        .package(url: "../BluetoothLinux", .branch("master")),
+               .package(url: "https://github.com/wickwirew/Runtime", .upToNextMajor(from: "2.1.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
