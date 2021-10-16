@@ -35,7 +35,7 @@ public class Characteristic<Value: DataConvertible> : CharacteristicType {
         self.descriptors = descriptors ?? (properties.contains(.notify) ? [GATTClientCharacteristicConfiguration().descriptor] : [])
     }*/
     
-    public init(wrappedValue value: Value, uuid: BluetoothUUID, _ properties: BitMaskOptionSet<GATT.Characteristic.Property>) {
+    public init(wrappedValue value: Value, uuid: BluetoothUUID, _ properties: BitMaskOptionSet<GATTAttribute.Characteristic.Property>) {
         self.value = value
         self.uuid = uuid
         self.properties = properties
@@ -72,7 +72,7 @@ public class Characteristic<Value: DataConvertible> : CharacteristicType {
 }
 
 
-extension BitMaskOptionSet where Element == GATT.Characteristic.Property {
+extension BitMaskOptionSet where Element == GATTAttribute.Characteristic.Property {
     var inferredPermissions: BitMaskOptionSet<GATTAttribute.Characteristic.Permission> {
         let mapping: [GATT.Characteristic.Property: ATTAttributePermission] = [
             .read: .read,
