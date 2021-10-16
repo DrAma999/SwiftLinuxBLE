@@ -74,7 +74,7 @@ public class Characteristic<Value: DataConvertible> : CharacteristicType {
 
 extension BitMaskOptionSet where Element == GATTAttribute.Characteristic.Property {
     var inferredPermissions: BitMaskOptionSet<GATTAttribute.Characteristic.Permission> {
-        let mapping: [GATT.Characteristic.Property: ATTAttributePermission] = [
+        let mapping: [GATTAttribute.Characteristic.Property: ATTAttributePermission] = [
             .read: .read,
             .notify: .read,
             .write: .write
