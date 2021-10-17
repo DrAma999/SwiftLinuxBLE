@@ -3,13 +3,12 @@ import Bluetooth
 import GATT
 import BluetoothLinux
 
-@available(macOS 10.12, *)
 public protocol Peripheral : AnyObject {
     var peripheral: GATTPeripheral<HostController, L2CAPSocket> { get }
     var services: [Service] { get set }
     var characteristicsByHandle: [UInt16: CharacteristicType] { get set }
 }
-@available(macOS 10.12, *)
+
 extension Peripheral {
     public func advertise(name: GAPCompleteLocalName, services: [Service], iBeaconUUID: UUID? = nil) throws {
         // Advertise services and peripheral name
@@ -41,7 +40,7 @@ extension Peripheral {
         let _ = try peripheral.add(service: gattService)
         
         
-        for var characteristic in characteristics {
+        for characteristic in characteristics {
             guard let handle = peripheral.characteristics(for: characteristic.uuid).last else { continue }
             
             print("Characteristic \(characteristic.uuid) with permissions \(characteristic.permissions) and \(characteristic.descriptors.count) descriptors")
