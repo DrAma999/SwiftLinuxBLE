@@ -3,7 +3,7 @@ import Bluetooth
 import GATT
 import BluetoothLinux
 
-@available(macOS 10.12, *)
+//@available(macOS 10.12, *)
 extension HostController {
     public func newPeripheral() throws -> GATTPeripheral<HostController, L2CAPSocket> {
         // Setup peripheral
