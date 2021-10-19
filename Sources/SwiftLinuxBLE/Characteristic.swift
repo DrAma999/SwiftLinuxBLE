@@ -6,8 +6,8 @@ import BluetoothLinux
 
 public protocol CharacteristicType {
     var uuid: BluetoothUUID { get }
-    var properties: BitMaskOptionSet<GATTAttribute.Characteristic.Property> { get }
-    var permissions: BitMaskOptionSet<GATTAttribute.Characteristic.Permission> { get }
+    var properties: BitMaskOptionSet<GATT.CharacteristicProperty> { get }
+    var permissions: BitMaskOptionSet<GATT.AttributePermission> { get }
     var descriptors: [GATTAttribute.Descriptor] { get }
     
     var data: Data { get set }
@@ -20,8 +20,8 @@ public protocol CharacteristicType {
 public class Characteristic<Value: DataConvertible> : CharacteristicType {
     var value: Value
     public let uuid: BluetoothUUID
-    public var properties: BitMaskOptionSet<GATTAttribute.Characteristic.Property> = [.read, .write]
-    public var permissions: BitMaskOptionSet<GATTAttribute.Characteristic.Permission> = [.read, .write]
+    public var properties: BitMaskOptionSet<GATT.CharacteristicProperty> = [.read, .write]
+    public var permissions: BitMaskOptionSet<GATT.AttributePermission> = [.read, .write]
     public let descriptors: [GATTAttribute.Descriptor]
     
     /*
@@ -35,7 +35,7 @@ public class Characteristic<Value: DataConvertible> : CharacteristicType {
         self.descriptors = descriptors ?? (properties.contains(.notify) ? [GATTClientCharacteristicConfiguration().descriptor] : [])
     }*/
     
-    public init(wrappedValue value: Value, uuid: BluetoothUUID, _ properties: BitMaskOptionSet<GATTAttribute.Characteristic.Property>) {
+    public init(wrappedValue value: Value, uuid: BluetoothUUID, _ properties: BitMaskOptionSet<GATT.CharacteristicProperty>) {
         self.value = value
         self.uuid = uuid
         self.properties = properties
@@ -72,14 +72,14 @@ public class Characteristic<Value: DataConvertible> : CharacteristicType {
 }
 
 
-extension BitMaskOptionSet where Element == GATTAttribute.Characteristic.Property {
-    var inferredPermissions: BitMaskOptionSet<GATTAttribute.Characteristic.Permission> {
-        let mapping: [GATTAttribute.Characteristic.Property: GATTAttribute.Characteristic.Permission] = [
+extension BitMaskOptionSet where Element == GATT.CharacteristicProperty {
+    var inferredPermissions: BitMaskOptionSet<GATT.AttributePermission> {
+        let mapping: [GATT.CharacteristicProperty : GATT.AttributePermission] = [
             .read: .read,
             .notify: .read,
             .write: .write
         ]
-        var permissions = BitMaskOptionSet<GATTAttribute.Characteristic.Permission>()
+        var permissions = BitMaskOptionSet<GATT.AttributePermission>()
         for (property, permission) in mapping {
             if contains(property) {
                 permissions.insert(permission)
