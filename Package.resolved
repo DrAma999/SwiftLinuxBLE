@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/DrAma999/Bluetooth.git",
         "state": {
           "branch": "master",
-          "revision": "f15e8883382742cc3fe8dfbe8520f361771dcda8",
+          "revision": "09d76a4cbbf241029dee74415db08e8a4b9be30b",
           "version": null
         }
       },
@@ -15,7 +15,7 @@
         "repositoryURL": "https://github.com/DrAma999/BluetoothLinux",
         "state": {
           "branch": "master",
-          "revision": "efcd9f6cb5b0877c867b618419ced8210cbb0436",
+          "revision": "71ae2e3f0cc95d89696d24c9d0d9ea5a9d302259",
           "version": null
         }
       },
@@ -24,7 +24,7 @@
         "repositoryURL": "https://github.com/DrAma999/GATT",
         "state": {
           "branch": "master",
-          "revision": "fc5473c1be1b13f761663e7523d6208a6d2a8ce8",
+          "revision": "bbbe1b7806443bb3bc8f35f62e4fcf9d5dcd0035",
           "version": null
         }
       },
