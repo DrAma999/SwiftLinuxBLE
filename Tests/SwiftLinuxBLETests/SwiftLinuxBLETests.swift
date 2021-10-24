@@ -20,13 +20,12 @@ final class SwiftLinuxBLETests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
         print("TEST")
-        
-        
-        let service = try TestService()
+        let service =  try? TestService()
         let serviceInfo = try? Runtime.typeInfo(of: type(of: service))
         
-        //print("x = \(service._temperature)")
-        print("serviceInfo = \(serviceInfo)")
+        print("x = \(service?.temperature)")
+        print("serviceInfo = \(String(describing: serviceInfo))")
+        XCTAssertTrue(true)
     }
 
     static var allTests = [
