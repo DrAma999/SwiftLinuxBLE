@@ -3,38 +3,47 @@
     "pins": [
       {
         "package": "Bluetooth",
-        "repositoryURL": "https://github.com/DrAma999/Bluetooth.git",
+        "repositoryURL": "https://github.com/PureSwift/Bluetooth.git",
         "state": {
-          "branch": "master",
-          "revision": "09d76a4cbbf241029dee74415db08e8a4b9be30b",
-          "version": null
+          "branch": null,
+          "revision": "1eb838e98405d45b7d287bae9d5e962acbdcbf3d",
+          "version": "6.1.1"
         }
       },
       {
         "package": "BluetoothLinux",
         "repositoryURL": "https://github.com/DrAma999/BluetoothLinux",
         "state": {
-          "branch": "master",
-          "revision": "71ae2e3f0cc95d89696d24c9d0d9ea5a9d302259",
+          "branch": "super_mega_update",
+          "revision": "524adb5d8fc0b2fe4c18a753702cfa479114e613",
           "version": null
         }
       },
       {
         "package": "GATT",
-        "repositoryURL": "https://github.com/DrAma999/GATT",
+        "repositoryURL": "https://github.com/PureSwift/GATT.git",
         "state": {
-          "branch": "master",
-          "revision": "bbbe1b7806443bb3bc8f35f62e4fcf9d5dcd0035",
+          "branch": null,
+          "revision": "1c73155186f93402cf20bc9798e224e56bffd8f5",
+          "version": "3.0.4"
+        }
+      },
+      {
+        "package": "Socket",
+        "repositoryURL": "https://github.com/PureSwift/Socket.git",
+        "state": {
+          "branch": "main",
+          "revision": "251d781a5ef6a7d4b8a3106f3d574a79de232780",
           "version": null
         }
       },
       {
-        "package": "Runtime",
-        "repositoryURL": "https://github.com/wickwirew/Runtime",
+        "package": "swift-system",
+        "repositoryURL": "https://github.com/PureSwift/swift-system",
         "state": {
-          "branch": null,
-          "revision": "a848b81e1a0100801f572e5273ffe4352fd54088",
-          "version": "2.2.2"
+          "branch": "feature/dynamic-lib",
+          "revision": "3e5be49e7cee5ba46f5b5bc994f08061dd9fe92a",
+          "version": null
         }
       }
     ]

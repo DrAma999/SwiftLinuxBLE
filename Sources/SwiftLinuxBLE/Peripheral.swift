@@ -4,18 +4,18 @@ import GATT
 import BluetoothLinux
 
 public protocol Peripheral : AnyObject {
-    var peripheral: GATTPeripheral<HostController, L2CAPSocket> { get }
+    var peripheral: GATTPeripheral<HostController, BluetoothLinux.L2CAPSocket> { get }
     var services: [Service] { get set }
     var characteristicsByHandle: [UInt16: CharacteristicType] { get set }
 }
 
 extension Peripheral {
-    public func advertise(name: GAPCompleteLocalName, services: [Service], iBeaconUUID: UUID? = nil) throws {
+    public func advertise(name: GAPCompleteLocalName, services: [Service], iBeaconUUID: UUID? = nil) async throws {
         // Advertise services and peripheral name
         let serviceUUIDs = GAPIncompleteListOf128BitServiceClassUUIDs(uuids: services.map { UUID(bluetooth: $0.uuid) })
         let encoder = GAPDataEncoder()
         let data = try encoder.encodeAdvertisingData(name, serviceUUIDs)
-        try peripheral.controller.setLowEnergyScanResponse(data, timeout: .default)
+        try await peripheral.hostController.setLowEnergyScanResponse(data, timeout: .default)
         print("BLE Advertising started")
         
         // Setup iBeacon
@@ -23,10 +23,10 @@ extension Peripheral {
             let rssi: Int8 = 30
             let beacon = AppleBeacon(uuid: iBeaconUUID, rssi: rssi)
             let flags: GAPFlags = [.lowEnergyGeneralDiscoverableMode, .notSupportedBREDR]
-            try peripheral.controller.iBeacon(beacon, flags: flags, interval: .min, timeout: .default)
+            try await peripheral.hostController.iBeacon(beacon, flags: flags, interval: .min, timeout: .default)
         }
     }
-    public func add(service: Service) throws {
+    public func add(service: Service) async throws {
         // Find all the characteristics for the service
         let characteristics = Mirror(reflecting: service).children.compactMap {
             $0.value as? CharacteristicType
@@ -37,18 +37,18 @@ extension Peripheral {
         }
         
         let gattService = GATTAttribute.Service(uuid: service.uuid, primary: true, characteristics: gattCharacteristics)
-        let _ = try peripheral.add(service: gattService)
+        let _ = try await peripheral.add(service: gattService)
         
         
         for characteristic in characteristics {
-            guard let handle = peripheral.characteristics(for: characteristic.uuid).last else { continue }
+            guard let handle = await peripheral.characteristics(for: characteristic.uuid).last else { continue }
             
             print("Characteristic \(characteristic.uuid) with permissions \(characteristic.permissions) and \(characteristic.descriptors.count) descriptors")
             
             // Register as observer for each characteristic
-            characteristic.didSet { [weak self] in
+            characteristic.didSet {
                 NSLog("MyPeripheral: characteristic \(characteristic.uuid) did change with new value \($0)")
-                self?.peripheral[characteristic: handle] = $0
+                //self?.peripheral[characteristic: handle] = $0
             }
           
             characteristicsByHandle[handle] = characteristic
