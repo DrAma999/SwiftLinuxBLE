@@ -11,7 +11,7 @@ extension HostController {
         
         let peripheral = GATTPeripheral<HostController, BluetoothLinux.L2CAPSocket>(hostController: self, socket: BluetoothLinux.L2CAPSocket.self)
         peripheral.log = { print("Peripheral Log: \($0)") }
-        try await peripheral.start()
+ //       try await peripheral.start()
 //        peripheral.newConnection = {
 //           let socket = try serverSocket.waitForConnection()
 //           let central = Central(id: socket.address)
